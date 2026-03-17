@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "shulkerboxutils",
+	"version": "${version}",
+	"name": "Shulker Box Utils",
+	"description": "Displays the first item icon above placed shulker boxes.",
+	"authors": [
+		"fweigel-dev"
+	],
+	"contact": {
+		"homepage": "",
+		"sources": ""
+	},
+	"license": "CC-BY-4.0",
+	"icon": "assets/shulkerboxutils/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"dev.fweigel.shulkerboxutils.ShulkerBoxUtilsClient"
+		]
+	},
+	"mixins": [
+		{
+			"config": "shulkerboxutils.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.2",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*",
+		"fweigel-util-lib": ">=0.1.0"
+	}
+}

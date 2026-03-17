@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "dev.fweigel.shulkerboxutils.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"ShulkerBoxRendererMixin",
+		"ShulkerInventoryMixin",
+		"ShulkerItemTooltipMixin",
+		"ShulkerContainerTooltipMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

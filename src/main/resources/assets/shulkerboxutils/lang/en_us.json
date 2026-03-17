@@ -1,0 +1,18 @@
+{
+  "key.shulkerboxutils.config": "Open Shulker Box Utils",
+  "key.category.shulkerboxutils.general": "Shulker Box Utils",
+
+  "shulkerboxutils.screen.title": "Shulker Box Utils",
+
+  "shulkerboxutils.screen.badge.card": "Inv. Badge: %s",
+  "shulkerboxutils.screen.world_icon.card": "World Icon: %s",
+  "shulkerboxutils.screen.fill_indicator.card": "Fill Bar: %s",
+  "shulkerboxutils.screen.contents_preview.card": "Contents: %s",
+
+  "shulkerboxutils.screen.uniform_only": "Display Mode: %s",
+  "shulkerboxutils.screen.badge_mode.uniform": "Single Item Type",
+  "shulkerboxutils.screen.badge_mode.first": "First Item",
+
+  "shulkerboxutils.state.on": "ON",
+  "shulkerboxutils.state.off": "OFF"
+}
