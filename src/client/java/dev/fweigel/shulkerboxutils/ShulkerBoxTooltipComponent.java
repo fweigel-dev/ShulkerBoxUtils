@@ -1,7 +1,7 @@
 package dev.fweigel.shulkerboxutils;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.NonNullList;
@@ -55,7 +55,7 @@ public class ShulkerBoxTooltipComponent implements ClientTooltipComponent {
     }
 
     @Override
-    public void renderImage(Font font, int x, int y, int width, int height, GuiGraphics graphics) {
+    public void extractImage(Font font, int x, int y, int width, int height, GuiGraphicsExtractor graphics) {
         // 1. Top strip — rounded top corners from the actual panel top.
         graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE,
                 x, y, 0f, 0f, WIDTH, H_TOP, TEX_SIZE, TEX_SIZE);
@@ -76,8 +76,8 @@ public class ShulkerBoxTooltipComponent implements ClientTooltipComponent {
             int row = i / COLS;
             int itemX = x + ITEM_LEFT + col * SLOT_SIZE;
             int itemY = y + ITEM_TOP  + row * SLOT_SIZE;
-            graphics.renderItem(stack, itemX, itemY);
-            graphics.renderItemDecorations(font, stack, itemX, itemY);
+            graphics.item(stack, itemX, itemY);
+            graphics.itemDecorations(font, stack, itemX, itemY);
         }
     }
 }

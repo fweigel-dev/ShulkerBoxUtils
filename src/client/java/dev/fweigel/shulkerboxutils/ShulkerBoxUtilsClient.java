@@ -5,7 +5,7 @@ import dev.fweigel.mobutils.core.client.util.ItemStackUtils;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.ClientTooltipComponentCallback;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.client.KeyMapping;
@@ -27,7 +27,7 @@ public class ShulkerBoxUtilsClient implements ClientModInitializer {
     public void onInitializeClient() {
         configKey = ConfigKeyHelper.register("shulkerboxutils", "key.shulkerboxutils.config", GLFW.GLFW_KEY_B);
 
-        TooltipComponentCallback.EVENT.register(data -> {
+        ClientTooltipComponentCallback.EVENT.register(data -> {
             if (data instanceof ShulkerBoxTooltipData tooltipData) {
                 return new ShulkerBoxTooltipComponent(tooltipData);
             }
@@ -115,6 +115,7 @@ public class ShulkerBoxUtilsClient implements ClientModInitializer {
     private static void writeToCache(ItemStack item, boolean uniform) {
         BlockPos pos = ShulkerBoxUtilsCache.pendingPos;
         if (pos == null) return;
+        ShulkerBoxUtilsCache.SCREEN_AUTHORITATIVE.add(pos);
         if (item.isEmpty()) {
             ShulkerBoxUtilsCache.ITEMS.remove(pos);
             ShulkerBoxUtilsCache.IS_UNIFORM.remove(pos);

@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.blockentity.state.ShulkerBoxRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -52,13 +52,11 @@ public class ShulkerBoxRendererMixin {
         BlockPos pos = blockEntity.getBlockPos().immutable();
         boolean hasAny = hasAnyItem(blockEntity);
 
-        if (hasAny) {
+        if (hasAny && !ShulkerBoxUtilsCache.SCREEN_AUTHORITATIVE.contains(pos)) {
+            // Only seed from block entity data if the screen has never provided an authoritative
+            // value for this position. The client-side BE is stale for closed boxes.
             ItemStack firstItem = getFirstItem(blockEntity);
             ShulkerBoxUtilsCache.ITEMS.put(pos, firstItem.copy());
-            // Only seed IS_UNIFORM from the block entity if no authoritative value exists yet.
-            // The client-side block entity inventory is stale for closed boxes (the server only
-            // sends slot updates to the open container menu, not back to the block entity).
-            // Screen events in ShulkerBoxUtilsClient are the authoritative source for updates.
             if (!ShulkerBoxUtilsCache.IS_UNIFORM.containsKey(pos)) {
                 boolean uniform = !ItemStackUtils.getUniformItem(blockEntity).isEmpty();
                 ShulkerBoxUtilsCache.IS_UNIFORM.put(pos, uniform);
@@ -70,7 +68,7 @@ public class ShulkerBoxRendererMixin {
     }
 
     @Inject(
-        method = "submit(Lnet/minecraft/client/renderer/blockentity/state/ShulkerBoxRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V",
+        method = "submit(Lnet/minecraft/client/renderer/blockentity/state/ShulkerBoxRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V",
         at = @At("TAIL")
     )
     private void renderIcon(ShulkerBoxRenderState renderState, PoseStack poseStack,

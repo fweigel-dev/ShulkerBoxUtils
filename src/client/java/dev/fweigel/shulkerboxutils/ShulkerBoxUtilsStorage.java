@@ -36,6 +36,7 @@ public final class ShulkerBoxUtilsStorage {
     public static void loadForWorld(Minecraft client) {
         ShulkerBoxUtilsCache.ITEMS.clear();
         ShulkerBoxUtilsCache.IS_UNIFORM.clear();
+        ShulkerBoxUtilsCache.SCREEN_AUTHORITATIVE.clear();
         STORAGE.loadForWorld(client).ifPresentOrElse(data -> {
             if (data.items != null) {
                 for (var entry : data.items.entrySet()) {
@@ -46,6 +47,7 @@ public final class ShulkerBoxUtilsStorage {
                         boolean uniform = data.nonUniformPositions == null
                                 || !data.nonUniformPositions.contains(entry.getKey());
                         ShulkerBoxUtilsCache.IS_UNIFORM.put(pos, uniform);
+                        ShulkerBoxUtilsCache.SCREEN_AUTHORITATIVE.add(pos);
                     }
                 }
             }

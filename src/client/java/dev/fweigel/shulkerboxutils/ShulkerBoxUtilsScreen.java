@@ -1,7 +1,7 @@
 package dev.fweigel.shulkerboxutils;
 
 import dev.fweigel.mobutils.core.client.ui.ModScreen;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -90,9 +90,9 @@ public class ShulkerBoxUtilsScreen extends ModScreen {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        super.render(graphics, mouseX, mouseY, delta);
-        graphics.drawCenteredString(this.font, this.title, this.width / 2, 12, 0xFFFFFFFF);
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+        super.extractRenderState(graphics, mouseX, mouseY, delta);
+        graphics.centeredText(this.font, this.title, this.width / 2, 12, 0xFFFFFFFF);
 
         int cx   = this.width / 2;
         int colL = cx - BUTTON_WIDTH / 2;
@@ -106,7 +106,7 @@ public class ShulkerBoxUtilsScreen extends ModScreen {
         drawCardPreview(graphics, colR, row2, ShulkerBoxUtilsConfig.isContentsPreviewEnabled() ? IMG_CONT_ON   : IMG_CONT_OFF);
     }
 
-    private void drawCardPreview(GuiGraphics graphics, int x, int y, Identifier texture) {
+    private void drawCardPreview(GuiGraphicsExtractor graphics, int x, int y, Identifier texture) {
         // 1px black border around the preview area
         graphics.fill(x - 1, y - 1, x + CARD_W + 1, y + CARD_PREV_H + 1, 0xFF000000);
         // Scale 320×180 → 96×54 (factor 0.3 exactly, no distortion)

@@ -1,7 +1,7 @@
 package dev.fweigel.shulkerboxutils.mixin;
 
 import dev.fweigel.shulkerboxutils.ShulkerBoxUtilsConfig;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Mth;
@@ -17,15 +17,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(GuiGraphics.class)
+@Mixin(GuiGraphicsExtractor.class)
 public class ShulkerInventoryMixin {
 
-    // Prevents infinite recursion when we call renderItem to draw the badge.
+    // Prevents infinite recursion when we call item() to draw the badge.
     @Unique
     private static final ThreadLocal<Boolean> spRendering = ThreadLocal.withInitial(() -> false);
 
     @Inject(
-        method = "renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V",
+        method = "item(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V",
         at = @At("TAIL")
     )
     private void renderShulkerDecorations(LivingEntity entity, Level level, ItemStack stack,
@@ -39,7 +39,7 @@ public class ShulkerInventoryMixin {
         boolean fillEnabled = ShulkerBoxUtilsConfig.isFillIndicatorEnabled();
         if (!badgeEnabled && !fillEnabled) return;
 
-        GuiGraphics self = (GuiGraphics) (Object) this;
+        GuiGraphicsExtractor self = (GuiGraphicsExtractor) (Object) this;
 
         ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
         int filledSlots = 0;
@@ -69,7 +69,7 @@ public class ShulkerInventoryMixin {
                 pose.scale(0.5f, 0.5f);
                 spRendering.set(true);
                 try {
-                    self.renderItem(firstItem, 0, 0);
+                    self.item(firstItem, 0, 0);
                 } finally {
                     spRendering.set(false);
                     pose.popMatrix();
