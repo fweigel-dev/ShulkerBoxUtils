@@ -10,7 +10,8 @@
   <div>
     <h3 style="margin: 0 0 10px 0; font-size: 20px; font-weight: 700;">Supported Versions:</h3>
     <img width="165" height="84" alt="Minecraft 1.21.11" src="https://raw.githubusercontent.com/fweigel-dev/ShulkerBoxUtils/refs/heads/main/README/1.21.11.png"/>
-    <img width="165" height="84" alt="Minecraft 1.26.1" src="https://raw.githubusercontent.com/fweigel-dev/ShulkerBoxUtils/refs/heads/main/README/26.1.png"/>
+    <img width="165" height="84" alt="Minecraft 26.1" src="https://raw.githubusercontent.com/fweigel-dev/ShulkerBoxUtils/refs/heads/main/README/26.1.png"/>
+    <img width="165" height="84" alt="Minecraft 26.2" src="https://raw.githubusercontent.com/fweigel-dev/ShulkerBoxUtils/refs/heads/main/README/26.2.png"/>
   </div>
 </div>
 

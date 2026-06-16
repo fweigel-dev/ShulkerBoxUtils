@@ -42,7 +42,7 @@ public class ShulkerBoxUtilsClient implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (configKey.consumeClick()) {
-                client.setScreen(new ShulkerBoxUtilsScreen());
+                client.setScreenAndShow(new ShulkerBoxUtilsScreen());
             }
         });
 
