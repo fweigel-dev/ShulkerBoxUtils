@@ -32,7 +32,7 @@ public class ShulkerBoxUtilsScreen extends ModSettingsScreen {
     @Override
     public void onClose() {
         if (parent != null && this.minecraft != null) {
-            this.minecraft.setScreen(parent);
+            this.minecraft.gui.setScreen(parent);
         } else {
             super.onClose();
         }

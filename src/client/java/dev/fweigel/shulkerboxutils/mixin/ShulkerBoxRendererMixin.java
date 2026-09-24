@@ -126,15 +126,15 @@ public class ShulkerBoxRendererMixin {
         switch (dir) {
             case UP -> {
                 poseStack.translate(0.5, 1.0 + lid + o, 0.5);
-                poseStack.mulPose(Axis.XP.rotationDegrees(-90));
+                poseStack.rotateDegrees(Axis.XP, -90);
             }
             case DOWN -> {
                 poseStack.translate(0.5, -lid - o, 0.5);
-                poseStack.mulPose(Axis.XP.rotationDegrees(90));
+                poseStack.rotateDegrees(Axis.XP, 90);
             }
             case NORTH -> {
                 poseStack.translate(0.5, 0.5, -lid - o);
-                poseStack.mulPose(Axis.YP.rotationDegrees(180));
+                poseStack.rotateDegrees(Axis.YP, 180);
             }
             case SOUTH -> {
                 poseStack.translate(0.5, 0.5, 1.0 + lid + o);
@@ -142,15 +142,15 @@ public class ShulkerBoxRendererMixin {
             }
             case EAST -> {
                 poseStack.translate(1.0 + lid + o, 0.5, 0.5);
-                poseStack.mulPose(Axis.YP.rotationDegrees(90));
+                poseStack.rotateDegrees(Axis.YP, 90);
             }
             case WEST -> {
                 poseStack.translate(-lid - o, 0.5, 0.5);
-                poseStack.mulPose(Axis.YP.rotationDegrees(-90));
+                poseStack.rotateDegrees(Axis.YP, -90);
             }
         }
         // Undo the 180°Y mirror baked into ItemDisplayContext.FIXED
-        poseStack.mulPose(Axis.YP.rotationDegrees(180));
+        poseStack.rotateDegrees(Axis.YP, 180);
         poseStack.scale(0.5f, 0.5f, 0.5f);
     }
 }
