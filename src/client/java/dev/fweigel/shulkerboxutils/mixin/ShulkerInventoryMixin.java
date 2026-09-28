@@ -24,11 +24,32 @@ public class ShulkerInventoryMixin {
     private static final ThreadLocal<Boolean> spRendering = ThreadLocal.withInitial(() -> false);
 
     @Inject(
+        method = "item(Lnet/minecraft/world/item/ItemStack;II)V",
+        at = @At("TAIL")
+    )
+    private void renderShulkerDecorations(ItemStack stack, int x, int y, CallbackInfo ci) {
+        renderBadge((GuiGraphicsExtractor) (Object) this, stack, x, y);
+    }
+
+    @Inject(
+        method = "item(Lnet/minecraft/world/item/ItemStack;III)V",
+        at = @At("TAIL")
+    )
+    private void renderShulkerDecorations(ItemStack stack, int x, int y, int seed, CallbackInfo ci) {
+        renderBadge((GuiGraphicsExtractor) (Object) this, stack, x, y);
+    }
+
+    @Inject(
         method = "item(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;III)V",
         at = @At("TAIL")
     )
     private void renderShulkerDecorations(LivingEntity entity, ItemStack stack,
                                           int x, int y, int seed, CallbackInfo ci) {
+        renderBadge((GuiGraphicsExtractor) (Object) this, stack, x, y);
+    }
+
+    @Unique
+    private static void renderBadge(GuiGraphicsExtractor self, ItemStack stack, int x, int y) {
         if (spRendering.get()) return;
         if (stack.isEmpty()) return;
         if (!(stack.getItem() instanceof BlockItem bi)) return;
@@ -37,8 +58,6 @@ public class ShulkerInventoryMixin {
         boolean badgeEnabled = ShulkerBoxUtilsConfig.isBadgeEnabled();
         boolean fillEnabled = ShulkerBoxUtilsConfig.isFillIndicatorEnabled();
         if (!badgeEnabled && !fillEnabled) return;
-
-        GuiGraphicsExtractor self = (GuiGraphicsExtractor) (Object) this;
 
         ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
         int filledSlots = 0;

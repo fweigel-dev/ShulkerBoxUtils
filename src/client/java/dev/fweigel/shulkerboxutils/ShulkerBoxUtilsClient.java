@@ -15,7 +15,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class ShulkerBoxUtilsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        configKey = ConfigKeyHelper.register("shulkerboxutils", "key.shulkerboxutils.config", GLFW.GLFW_KEY_B);
+        configKey = ConfigKeyHelper.register("shulkerboxutils", "key.shulkerboxutils.config", InputConstants.KEY_B);
 
         ClientTooltipComponentCallback.EVENT.register(data -> {
             if (data instanceof ShulkerBoxTooltipData tooltipData) {
