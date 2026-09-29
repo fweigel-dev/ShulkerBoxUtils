@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"client": [
 			"dev.fweigel.shulkerboxutils.ShulkerBoxUtilsClient"
+		],
+		"modmenu": [
+			"dev.fweigel.shulkerboxutils.ShulkerBoxUtilsModMenu"
 		]
 	},
 	"mixins": [
@@ -30,6 +33,9 @@
 		"minecraft": ">=26.3",
 		"java": ">=21",
 		"fabric-api": "*",
-		"fweigel-util-lib": ">=0.1.0"
+		"fweigel-util-lib": ">=1.6.0"
+	},
+	"suggests": {
+		"modmenu": "*"
 	}
 }
