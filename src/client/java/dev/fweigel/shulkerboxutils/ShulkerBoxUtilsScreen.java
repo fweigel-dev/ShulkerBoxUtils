@@ -3,6 +3,7 @@ package dev.fweigel.shulkerboxutils;
 import dev.fweigel.mobutils.core.client.ui.ModOptionsList;
 import dev.fweigel.mobutils.core.client.ui.ModOptionsList.CardSpec;
 import dev.fweigel.mobutils.core.client.ui.ModSettingsScreen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
@@ -18,7 +19,11 @@ public class ShulkerBoxUtilsScreen extends ModSettingsScreen {
     private static final Identifier IMG_CONT_OFF  = id("contents_preview_off.png");
 
     public ShulkerBoxUtilsScreen() {
-        super(Component.translatable("shulkerboxutils.screen.title"));
+        this(null);
+    }
+
+    public ShulkerBoxUtilsScreen(Screen parent) {
+        super(Component.translatable("shulkerboxutils.screen.title"), parent);
     }
 
     @Override
